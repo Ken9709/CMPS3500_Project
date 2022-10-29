@@ -10,34 +10,48 @@
 import pandas as pd
 
 # load the csv file into a data frame
-airline_data = pd.read_csv('2019_Airline_Delays_Dataset_train.csv')
-# removes the index column
-blankIndex = [''] * len(airline_data)
-airline_data.index = blankIndex
+airline_data = pd.read_csv('Airline_data.csv')
 
-# Lists all columns in the dataset
-print("The columns are: \n")
-print(airline_data.columns.values)
+mode = int(input("Press 1 for data exploration, 2 for Description"))
 
-# Prompt user to drop columns
-column_to_drop = input("\nEnter the name of the Column you'd like to drop: ")
-airline_data.drop(column_to_drop, axis =1,inplace =True)
+if mode == 1:
+    # removes the index column
+    blankIndex = [''] * len(airline_data)
+    airline_data.index = blankIndex
 
-# print updated columns
-print("\n Updated Columns :\n")
-print(airline_data.columns.values)
+    # Lists all columns in the dataset
+    print("The columns are: \n")
+    print(airline_data.columns.values)
 
-# prompt user for column to count distint values
-col_to_count= input("\nFor which Column would you like to know the count of Distinct Values: ")
-distinct_val_count = len(pd.unique(airline_data[col_to_count]))
-print("\nNo. of unique values in %s: %d" % (col_to_count,distinct_val_count))
+    # Prompt user to drop columns
+    column_to_drop = input("\nEnter the name of the Column you'd like to drop: ")
+    airline_data.drop(column_to_drop, axis =1,inplace =True)
 
-# prompt user for which column to sort (Ascending or descending)
-col_to_sort = input("\nEnter the column you'd like to be sorted: ")
-sorting_method = int(input("Enter 1 for Ascending or 2 for descending "))
-if sorting_method == 1:
-    a_sorted_col = airline_data.sort_values(by = col_to_sort)
-    print(a_sorted_col)
-elif sorting_method == 2:
-    d_sorted_col = airline_data.sort_values(by = col_to_sort,ascending = False)
-    print(d_sorted_col)
+    # print updated columns
+    print("\n Updated Columns :\n")
+    print(airline_data.columns.values)
+
+    # prompt user for column to count distint values
+    col_to_count= input("\nFor which Column would you like to know the count of Distinct Values: ")
+    distinct_val_count = len(pd.unique(airline_data[col_to_count]))
+    print("\nNo. of unique values in %s: %d" % (col_to_count,distinct_val_count))
+
+    # prompt user for which column to sort (Ascending or descending)
+    col_to_sort = input("\nEnter the column you'd like to be sorted: ")
+    sorting_method = int(input("Enter 1 for Ascending or 2 for descending "))
+    if sorting_method == 1:
+        a_sorted_col = airline_data.sort_values(by = col_to_sort)
+        print(a_sorted_col)
+    elif sorting_method == 2:
+        d_sorted_col = airline_data.sort_values(by = col_to_sort,ascending = False)
+        print(d_sorted_col)
+
+
+if mode == 2:
+    col_to_mean = input("\nEnter the column you'd like to be be averaged: ")
+    meanSum = 0
+    for index, row in airline_data.iterrows():
+        meanSum +=  airline_data.loc[index, col_to_mean]
+    
+    print(meanSum/len(airline_data.axes[0]))
+    
