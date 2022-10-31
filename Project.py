@@ -56,3 +56,25 @@ if mode == 2:
 
     print(meanSum/len(airline_data.axes[0]))
      
+
+if mode ==3:
+    col_to_min =  input("\nEnter the column you'd like to find the minimum of")
+    lowest = None
+    values = airline_data[col_to_min].tolist()
+    for i in values:
+        if lowest == None:
+            lowest = i
+        elif lowest > i:
+            lowest = i 
+    print(lowest)4
+
+if mode ==4:
+    col_to_max =  input("\nEnter the column you'd like to find the maximum of")
+    highest = None
+    values = airline_data[col_to_max].tolist()
+    for i in values:
+        if highest == None:
+            highest = i
+        elif i > highest:
+            highest = i 
+    print(highest)
