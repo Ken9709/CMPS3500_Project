@@ -50,8 +50,9 @@ if mode == 1:
 if mode == 2:
     col_to_mean = input("\nEnter the column you'd like to be be averaged: ")
     meanSum = 0
-    for index, row in airline_data.iterrows():
-        meanSum +=  airline_data.loc[index, col_to_mean]
-    
+    values = airline_data[col_to_mean].tolist()
+    for i in values:
+        meanSum += i
+
     print(meanSum/len(airline_data.axes[0]))
-    
+     
